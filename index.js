@@ -168,6 +168,13 @@ async function run() {
             res.send(result)
         })
 
+        app.get('/myCampaign/:email',async(req,res)=>{
+          const email = req.params.email;
+          const cursor = {email: email}
+          const result = await campaignCollection.find(cursor).toArray()
+          res.send(result)
+        })
+
         app.post('/donation',async(req,res)=>{
           const donationData =req.body;
           const result = await donationCollection.insertOne(donationData)
