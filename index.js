@@ -111,7 +111,10 @@ const campaigns = [
 ];
 
 
+
 app.use(cors())
+
+
 app.use(express.json())
 
 
@@ -131,7 +134,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
 
-    await client.connect();
+    // await client.connect();
 
     const campaignCollection = client.db('campaigns').collection('allCampaign')
     const donationCollection =client.db('campaigns').collection('userDonation')
@@ -187,8 +190,36 @@ async function run() {
           res.send(result)
         })
 
+        app.patch('/updateMyCampaign/:id',async(req,res)=>{
+          const id = req.params.id;
+          const query = { _id:new ObjectId(id)}
+          const data = req.body;
+          const updatedData={
+            $set:{
+              userName : data?.userName,
+              email: data?.email,
+              title : data?.title,
+              description : data?.description,
+              image :data?.image,
+              deadline : data?.deadline,
+              raisedAmount : data?.raisedAmount,
+              goal : data?.goal,
+              minDonation : data?.minDonation,
+              campaignType : data?.campaignType
+            }
+          }
+          const result = await campaignCollection.updateOne(query,updatedData)
+          res.send(result)
+        })
 
-    await client.db("admin").command({ ping: 1 });
+        app.delete('/deleteMyCampaign/:id',async(req,res)=>{
+          const id = req.params.id;
+          const filter = {_id : new ObjectId(id)}
+          const result = await campaignCollection.deleteOne(filter)
+          res.send(result)
+        })
+
+    // await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // await client.close();
