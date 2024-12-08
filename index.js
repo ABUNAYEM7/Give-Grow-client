@@ -139,14 +139,6 @@ async function run() {
     const campaignCollection = client.db('campaigns').collection('allCampaign')
     const donationCollection =client.db('campaigns').collection('userDonation')
 
-        const existingData =await campaignCollection.find().toArray()
-        if(existingData.length === 0){
-            const result = await campaignCollection.insertMany(campaigns)
-            console.log('Campaigns inserted:', result.insertedCount);
-        }else{
-            console.log('Campaigns already exist.');
-        }
-
         app.get('/campaigns',async(req,res)=>{
             const result =await campaignCollection.find({deadline :{$gt:new Date()}}).limit(6).toArray()
             res.send(result)
