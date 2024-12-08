@@ -182,27 +182,27 @@ async function run() {
           res.send(result)
         })
 
-        // app.patch('/updateMyCampaign/:id',async(req,res)=>{
-        //   const id = req.params.id;
-        //   const query = { _id:new ObjectId(id)}
-        //   const data = req.body;
-        //   const updatedData={
-        //     $set:{
-        //       userName : data?.userName,
-        //       email: data?.email,
-        //       title : data?.title,
-        //       description : data?.description,
-        //       image :data?.image,
-        //       deadline : data?.deadline,
-        //       raisedAmount : data?.raisedAmount,
-        //       goal : data?.goal,
-        //       minDonation : data?.minDonation,
-        //       campaignType : data?.campaignType
-        //     }
-        //   }
-        //   const result = await campaignCollection.updateOne(query,updatedData)
-        //   res.send(result)
-        // })
+        app.patch('/updateMyCampaign/:id',async(req,res)=>{
+          const id = req.params.id;
+          const query = { _id:new ObjectId(id)}
+          const data = req.body;
+          const updatedData={
+            $set:{
+              userName : data?.userName,
+              email: data?.email,
+              title : data?.title,
+              description : data?.description,
+              image :data?.image,
+              deadline : data?.deadline,
+              raisedAmount : data?.raisedAmount,
+              goal : data?.goal,
+              minDonation : data?.minDonation,
+              campaignType : data?.campaignType
+            }
+          }
+          const result = await campaignCollection.updateOne(query,updatedData)
+          res.send(result)
+        })
 
         app.delete('/deleteMyCampaign/:id',async(req,res)=>{
           const id = req.params.id;
