@@ -13,16 +13,6 @@ The Give&Grow Server is the backend service for the Give&Grow crowdfunding platf
 
 ---
 
-## Installation  
-
-### Prerequisites  
-- Node.js installed  
-- MongoDB Atlas or a local MongoDB instance  
-- A `.env` file with the following variables:  
-  ```env
-  PORT=5000
-  DB_USER=your_mongodb_username
-  DB_PASS=your_mongodb_password
 
 ## Live Link
 [Visit the live website](give-ngrow-server.vercel.app)
